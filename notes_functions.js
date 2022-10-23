@@ -1,24 +1,46 @@
 const fs = require("fs");
+// const ch = require("chalk");
+
+
+//aa chalk valu thatu km nathi....
+//const { default: chalk } = require("chalk");
 // const { title } = require("process");
 
 const addNote = function (title, body) {
   const listOfNotes = getListOfNotes();
+  var duplicateNotes = 0;
 
   console.log(listOfNotes);
   listOfNotes.push({
     title: title,
     body: body,
   });
-  const duplicateNotes = listOfNotes.filter(function (note) {
-    return note.title == title;
+
+  listOfNotes.filter(function (note) {
+    if (note.title == title) {
+      // console.log("TITLE ALREADY TAKEN");
+      // console.log("0 -" + duplicateNotes);
+      duplicateNotes++;
+      // console.log("1 -" + duplicateNotes);
+    }
   });
-  if (duplicateNotes === 0) {
+  // console.log("2 -" + duplicateNotes);
+  // saveNotes(listOfNotes);
+  if (duplicateNotes == 1) {
     saveNotes(listOfNotes);
-    console.log("NOTE ADDED");
+    chalk.red.inverse();
+    console.log(chalk.green.inverse("NOTE ADDED"));
+    // console.log("NOTE ADDED");
   } else {
-    console.log("TITLE ALREADY TAKEN");
+    console.log(chalk.red.inverse("TITLE ALREADY TAKEN"));
+    // console.log("TITLE ALREADY TAKEN");
   }
-  //   saveNotes(listOfNotes);
+  //   if (duplicateNotes == 0) {
+  //     saveNotes(listOfNotes);
+  //     console.log("NOTE ADDED");
+  //   } else {
+  //     console.log("TITLE ALREADY TAKEN");
+  //   }
 };
 
 const removeNote = function (title) {
