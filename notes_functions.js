@@ -123,6 +123,4 @@ module.exports = {
   addNote: addNote,
   notesList: notesList,
   readNote: readNote,
-  saveNotes: saveNotes,
-  getListOfNotes: getListOfNotes,
 };

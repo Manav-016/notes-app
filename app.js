@@ -1,9 +1,7 @@
-// const chalk = require("chalk");
-const fs = require("fs");
 const notesFunc = require("./notes_functions");
 // const { argv } = require("yargs");
 const yargs = require("yargs");
-const { demandOption } = require("yargs");
+// const { demandOption } = require("yargs");
 
 //Create ADD command
 
