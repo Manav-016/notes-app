@@ -3,6 +3,7 @@ const fs = require("fs");
 const notesFunc = require("./notes_functions");
 // const { argv } = require("yargs");
 const yargs = require("yargs");
+const { demandOption } = require("yargs");
 
 //Create ADD command
 
@@ -21,7 +22,7 @@ yargs.command({
       demandOption: true,
     },
   },
-  handler: function (argv) {
+  handler(argv) {
     notesFunc.addNote(argv.title, argv.body);
     // const dataBuffer = fs.readFileSync("app-json.json");
     // const dataString = dataBuffer.toString();
@@ -49,9 +50,8 @@ yargs.command({
       demandOption: true,
     },
   },
-  handler: function (argv) {
+  handler(argv) {
     notesFunc.removeNote(argv.title);
-    console.log("NOTE REMOVED");
   },
 });
 
@@ -60,8 +60,9 @@ yargs.command({
 yargs.command({
   command: "list",
   describe: "list command.....",
-  handler: function () {
-    console.log("SETTING UP LIST COMMAND OUTPUT");
+  handler() {
+    console.log("List Of Notes\n");
+    notesFunc.notesList();
   },
 });
 
@@ -70,8 +71,15 @@ yargs.command({
 yargs.command({
   command: "read",
   describe: "Reading Note.....",
-  handler: function () {
-    console.log("READING CONTENT");
+  builder: {
+    title: {
+      describe: "Reading The Note",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler(argv) {
+    notesFunc.readNote(argv.title);
   },
 });
 
